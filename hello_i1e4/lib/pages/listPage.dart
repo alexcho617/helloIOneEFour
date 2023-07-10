@@ -19,7 +19,7 @@ class ListPage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NewPage(),
+              builder: (context) => newPage(),
             ),
           );
         },
