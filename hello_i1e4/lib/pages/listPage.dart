@@ -8,6 +8,12 @@ class ListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("E1A4")),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          print("FAB Pressed");
+        },
+      ),
       body: Center(
         child: Text('LIST Page'),
       ),
