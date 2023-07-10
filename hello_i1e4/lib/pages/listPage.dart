@@ -1,5 +1,4 @@
-//리스트화면
-
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
 import 'package:flutter/material.dart';
 
 class ListPage extends StatelessWidget {
@@ -8,6 +7,7 @@ class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("E1A4")),
       body: Center(
         child: Text('LIST Page'),
       ),
