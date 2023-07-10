@@ -1,8 +1,13 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, must_be_immutable
 import 'package:flutter/material.dart';
+import '../teamMember.dart';
+import 'detailPage.dart';
+import 'newPage.dart';
 
 class ListPage extends StatelessWidget {
-  ListPage({super.key});
+  ListPage({Key? key});
+
+  List<TeamMember> teamMembers = TeamMember.getDummyTeamMembers();
 
   @override
   Widget build(BuildContext context) {
@@ -11,21 +16,35 @@ class ListPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          print("Navigate to NewPage Pressed");
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NewPage(),
+            ),
+          );
         },
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('CREATE LIST VEW'),
-            OutlinedButton(
-                onPressed: () {
-                  print("Navigate to DetailPage");
-                },
-                child: Text("Go to detail"))
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: teamMembers.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              // Navigation logic to detail page
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      DetailPage(teamMember: teamMembers[index]),
+                ),
+              );
+            },
+            child: ListTile(
+              title: Text(teamMembers[index].name),
+              subtitle: Text(teamMembers[index].city),
+              trailing: Text(teamMembers[index].mbti),
+            ),
+          );
+        },
       ),
     );
   }
