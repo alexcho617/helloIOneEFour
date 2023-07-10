@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_i1e4/pages/listPage.dart';
+import 'package:hello_i1e4/pages/newPage.dart';
 
 void main() {
   runApp(const MyApp());
