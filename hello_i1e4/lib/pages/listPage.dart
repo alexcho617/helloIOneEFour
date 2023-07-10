@@ -8,8 +8,24 @@ class ListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("E1A4")),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          print("Navigate to NewPage Pressed");
+        },
+      ),
       body: Center(
-        child: Text('LIST Page'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('CREATE LIST VEW'),
+            OutlinedButton(
+                onPressed: () {
+                  print("Navigate to DetailPage");
+                },
+                child: Text("Go to detail"))
+          ],
+        ),
       ),
     );
   }
