@@ -24,7 +24,7 @@ class ListPage extends StatelessWidget {
         backgroundColor: Colors.grey,
         toolbarHeight: 200,
       ),
-      body: ListView.builder(
+      body: ListView.separated(
         padding: const EdgeInsets.all(20.0),
         itemCount: teamMembers.length,
         itemBuilder: (context, index) {
@@ -52,12 +52,15 @@ class ListPage extends StatelessWidget {
                   Icon(
                     Icons.person,
                     color: Colors.grey[500],
-                    size: 50,
+                    size: 55,
                   ),
                 ],
               ),
             ),
           );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider();
         },
       ),
     );
