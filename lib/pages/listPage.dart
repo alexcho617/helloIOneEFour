@@ -41,10 +41,13 @@ class ListPage extends StatelessWidget {
                 ),
               );
             },
-            child: ListTile(
-              title: Text(teamMembers[index].name),
-              subtitle: Text(teamMembers[index].mbti),
-              trailing: Text(teamMembers[index].city),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0 ),
+              child: ListTile(
+                title: Text(teamMembers[index].name),
+                subtitle: Text(teamMembers[index].mbti),
+                trailing: Text(teamMembers[index].city),
+              ),
             ),
           );
         },
