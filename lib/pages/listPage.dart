@@ -16,14 +16,16 @@ class ListPage extends StatelessWidget {
         title: Text(
           "I1E4",
           style: TextStyle(
-            fontSize: 30,
+            fontSize: 50,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
         ),
-        toolbarHeight: 120, // Set this height
+        backgroundColor: Colors.grey,
+        toolbarHeight: 200, // Set this height
       ),
       body: ListView.builder(
+        padding: const EdgeInsets.all(20.0),
         itemCount: teamMembers.length,
         itemBuilder: (context, index) {
           return GestureDetector(
@@ -40,22 +42,10 @@ class ListPage extends StatelessWidget {
             child: ListTile(
               title: Text(teamMembers[index].name),
               subtitle: Text(teamMembers[index].mbti),
-              trailing: Text(teamMembers[index].city),
             ),
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add_rounded),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => newPage(),
-              ),
-            );
-          },
-          backgroundColor: Colors.grey),
     );
   }
 }
