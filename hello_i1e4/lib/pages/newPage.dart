@@ -1,11 +1,31 @@
-//추가화면
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class newPage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class newPage extends StatefulWidget {
   const newPage({super.key});
 
   @override
+  State<newPage> createState() => _newPageState();
+}
+
+class _newPageState extends State<newPage> {
+  @override
   Widget build(BuildContext context) {
+
+  XFile? photo_file;
+  final ImagePicker picker = ImagePicker();
+  Future getImage(ImageSource imageSource) async {
+      final XFile? pickedFile = await picker.pickImage(source: imageSource);
+      if (pickedFile != null) {
+        setState(() {
+          photo_file = XFile(pickedFile.path);
+          // print(photo_file?.path);
+        });
+      }
+  }
+
     return Scaffold(
       body: SafeArea(
         child: Column(children: [
@@ -21,10 +41,16 @@ class newPage extends StatelessWidget {
             alignment: Alignment.center,
             width: double.infinity,
             height: 300,
-            child: const Image(
-              image: AssetImage('assets/images/user.png'),
-            ),
-            ),
+            child: GestureDetector(
+              onTap: () {
+                getImage(ImageSource.gallery);
+              },
+              child: 
+              photo_file != null 
+              ? Image.file(File(photo_file!.path))
+              : const Image(image: AssetImage('assets/images/user.png')),
+              ),
+          ),
           const Divider(),
           Container(
             alignment: Alignment.centerLeft,
@@ -56,8 +82,7 @@ class newPageItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: TextField(
-        decoration: InputDecoration(
-        hintText: hintText),
+        decoration: InputDecoration(hintText: hintText),
         onChanged: (value) {
           // save
         },

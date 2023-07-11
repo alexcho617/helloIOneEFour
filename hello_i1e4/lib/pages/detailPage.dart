@@ -2,7 +2,7 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
-import '../teamMember.dart';
+import '../TeamMember.dart';
 
 
 class DetailPage extends StatelessWidget {
@@ -21,7 +21,7 @@ class DetailPage extends StatelessWidget {
             Text('Name: ${teamMember.name}'),
             Text('MBTI: ${teamMember.mbti}'),
             Text('City: ${teamMember.city}'),
-            Text('Fun Fact: ${teamMember.funFact}'),
+            Text('Comment: ${teamMember.comment}'),
           ],
         ),
       ),
