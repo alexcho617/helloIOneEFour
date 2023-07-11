@@ -16,7 +16,9 @@ class ListPage extends StatelessWidget {
       style: TextStyle(
         fontSize: 30,
         fontWeight: FontWeight.bold,
-        color: Colors.black,),),)
+        color: Colors.black,),),
+        toolbarHeight: 120, // Set this height
+      )
       
       body: ListView.builder(
         itemCount: teamMembers.length,
