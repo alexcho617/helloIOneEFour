@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, must_be_immutable
 import 'package:flutter/material.dart';
+import 'package:hello_i1e4/pages/newPage.dart';
 import '../teamMember.dart';
 import 'detailPage.dart';
 
@@ -62,6 +63,15 @@ class ListPage extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) {
           return Divider();
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.grey,
+        elevation: 1,
+        child: Icon(
+          Icons.add_circle,
+          size: 36,
+        ),
+        onPressed: () {},
       ),
     );
   }
