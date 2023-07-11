@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, must_be_immutable
 import 'package:flutter/material.dart';
-import 'package:hello_i1e4/pages/newPage.dart';
 import '../teamMember.dart';
 import 'detailPage.dart';
 
@@ -71,7 +70,7 @@ class ListPage extends StatelessWidget {
           Icons.add_circle,
           size: 36,
         ),
-        onPressed: () {},
+        onPressed: () {}, // 페이지 화면 전환(이동) 로직 필요
       ),
     );
   }
