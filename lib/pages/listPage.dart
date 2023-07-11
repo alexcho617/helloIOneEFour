@@ -17,6 +17,7 @@ class ListPage extends StatelessWidget {
         fontSize: 30,
         fontWeight: FontWeight.bold,
         color: Colors.black,),),)
+      
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -28,6 +29,7 @@ class ListPage extends StatelessWidget {
           );
         },
       ),
+      
       body: ListView.builder(
         itemCount: teamMembers.length,
         itemBuilder: (context, index) {
@@ -42,14 +44,11 @@ class ListPage extends StatelessWidget {
                 ),
               );
             },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0 ),
-              child: ListTile(
+            child: ListTile(
                 title: Text(teamMembers[index].name),
                 subtitle: Text(teamMembers[index].mbti),
                 trailing: Text(teamMembers[index].city),
               ),
-            ),
           );
         },
       ),
