@@ -12,14 +12,17 @@ class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("I1E4",
-      style: TextStyle(
-        fontSize: 30,
-        fontWeight: FontWeight.bold,
-        color: Colors.black,),),
+      appBar: AppBar(
+        title: Text(
+          "I1E4",
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
         toolbarHeight: 120, // Set this height
-      )
-      
+      ),
       body: ListView.builder(
         itemCount: teamMembers.length,
         itemBuilder: (context, index) {
@@ -35,26 +38,24 @@ class ListPage extends StatelessWidget {
               );
             },
             child: ListTile(
-                title: Text(teamMembers[index].name),
-                subtitle: Text(teamMembers[index].mbti),
-                trailing: Text(teamMembers[index].city),
-              ),
-          );
-        },
-      ),
-      
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add_rounded),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => newPage(),
+              title: Text(teamMembers[index].name),
+              subtitle: Text(teamMembers[index].mbti),
+              trailing: Text(teamMembers[index].city),
             ),
           );
         },
-        backgroundColor: Colors.grey
       ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add_rounded),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => newPage(),
+              ),
+            );
+          },
+          backgroundColor: Colors.grey),
     );
   }
 }
