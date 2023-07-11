@@ -12,15 +12,22 @@ class ListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "I1E4",
-          style: TextStyle(
-            fontSize: 50,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
+        title: ListTile(
+          title: Text(
+            "I1E4",
+            style: TextStyle(
+              fontSize: 70,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          subtitle: Text(
+            "안녕하세요? 저희는 I가 한명, E가 네 명인 I1E4 입니다!",
+            style: TextStyle(
+              fontSize: 16,
+            ),
           ),
         ),
-        // 서브타이틀로 "안녕하세요, 저희는 I가 한명, E가 네 명인 I1E4 입니다!를 넣으면 어떨지
         backgroundColor: Colors.grey,
         toolbarHeight: 200,
       ),
