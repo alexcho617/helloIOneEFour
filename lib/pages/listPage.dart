@@ -20,6 +20,7 @@ class ListPage extends StatelessWidget {
             color: Colors.black,
           ),
         ),
+        // 서브타이틀로 "안녕하세요, 저희는 I가 한명, E가 네 명인 I1E4 입니다!를 넣으면 어떨지
         backgroundColor: Colors.grey,
         toolbarHeight: 200,
       ),
@@ -45,6 +46,16 @@ class ListPage extends StatelessWidget {
               ),
               subtitle:
                   Text(teamMembers[index].mbti, style: TextStyle(fontSize: 12)),
+              leading: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Icon(
+                    Icons.person,
+                    color: Colors.grey[500],
+                    size: 50,
+                  ),
+                ],
+              ),
             ),
           );
         },
