@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import '../teamMember.dart';
 import 'detailPage.dart';
-import 'newPage.dart';
 
 class ListPage extends StatelessWidget {
   ListPage({Key? key});
@@ -22,7 +21,7 @@ class ListPage extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.grey,
-        toolbarHeight: 200, // Set this height
+        toolbarHeight: 200,
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(20.0),
@@ -40,8 +39,12 @@ class ListPage extends StatelessWidget {
               );
             },
             child: ListTile(
-              title: Text(teamMembers[index].name),
-              subtitle: Text(teamMembers[index].mbti),
+              title: Text(
+                teamMembers[index].name,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              subtitle:
+                  Text(teamMembers[index].mbti, style: TextStyle(fontSize: 12)),
             ),
           );
         },
