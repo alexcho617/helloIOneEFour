@@ -18,19 +18,6 @@ class ListPage extends StatelessWidget {
         fontWeight: FontWeight.bold,
         color: Colors.black,),),)
       
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add_rounded),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => newPage(),
-            ),
-          );
-        },
-        backgroundColor: Colors.grey
-      ),
-      
       body: ListView.builder(
         itemCount: teamMembers.length,
         itemBuilder: (context, index) {
@@ -52,6 +39,19 @@ class ListPage extends StatelessWidget {
               ),
           );
         },
+      ),
+      
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add_rounded),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => newPage(),
+            ),
+          );
+        },
+        backgroundColor: Colors.grey
       ),
     );
   }
