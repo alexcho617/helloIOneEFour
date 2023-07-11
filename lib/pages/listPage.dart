@@ -12,7 +12,10 @@ class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("I1E4")),
+      appBar: AppBar(title: Text("I1E4" style: TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,),)
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
