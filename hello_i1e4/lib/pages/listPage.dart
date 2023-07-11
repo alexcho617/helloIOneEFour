@@ -1,11 +1,8 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:hello_i1e4/TeamMember.dart';
 import 'package:hello_i1e4/service/member_service.dart';
 import 'package:provider/provider.dart';
-import 'detailPage.dart';
 import 'newPage.dart';
-import 'package:swipeable_tile/swipeable_tile.dart';
 
 class ListPage extends StatelessWidget {
   ListPage({Key? key});
@@ -16,7 +13,9 @@ class ListPage extends StatelessWidget {
       List<TeamMember> teamList = memberService.teamList;
 
       return Scaffold(
-        appBar: AppBar(title: Text("E1A4")),
+        appBar: AppBar(
+          title: Text("E1A4"),
+        ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
@@ -54,6 +53,7 @@ class ListPage extends StatelessWidget {
               ));
           },
         ),
+
       );
     });
   }

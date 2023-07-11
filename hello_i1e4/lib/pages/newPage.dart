@@ -1,30 +1,34 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:hello_i1e4/main.dart';
+import 'package:hello_i1e4/service/member_service.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class newPage extends StatefulWidget {
-  const newPage({super.key});
+  newPage({super.key,});
+
 
   @override
   State<newPage> createState() => _newPageState();
 }
 
 class _newPageState extends State<newPage> {
-  @override
-  Widget build(BuildContext context) {
 
   XFile? photo_file;
-  final ImagePicker picker = ImagePicker();
-  Future getImage(ImageSource imageSource) async {
+    final ImagePicker picker = ImagePicker();
+    Future getImage(ImageSource imageSource) async {
       final XFile? pickedFile = await picker.pickImage(source: imageSource);
       if (pickedFile != null) {
         setState(() {
           photo_file = XFile(pickedFile.path);
-          // print(photo_file?.path);
         });
       }
-  }
+    }
+
+  @override
+  Widget build(BuildContext context) {
+    MemberService memberService = context.read<MemberService>();
 
     return Scaffold(
       body: SafeArea(
@@ -44,12 +48,12 @@ class _newPageState extends State<newPage> {
             child: GestureDetector(
               onTap: () {
                 getImage(ImageSource.gallery);
+                print(photo_file?.path);
               },
-              child: 
-              photo_file != null 
-              ? Image.file(File(photo_file!.path))
-              : const Image(image: AssetImage('assets/images/user.png')),
-              ),
+              child: photo_file != null
+                  ? Image.file(File(photo_file!.path))
+                  : const Image(image: AssetImage('assets/images/user.png')),
+            ),
           ),
           const Divider(),
           Container(
