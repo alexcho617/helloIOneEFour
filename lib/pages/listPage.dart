@@ -19,7 +19,7 @@ class ListPage extends StatelessWidget {
         color: Colors.black,),),)
       
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(Icons.add_rounded),
         onPressed: () {
           Navigator.push(
             context,
@@ -28,6 +28,7 @@ class ListPage extends StatelessWidget {
             ),
           );
         },
+        backgroundColor: Colors.grey
       ),
       
       body: ListView.builder(
