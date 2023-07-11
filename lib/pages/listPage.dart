@@ -43,8 +43,8 @@ class ListPage extends StatelessWidget {
             },
             child: ListTile(
               title: Text(teamMembers[index].name),
-              subtitle: Text(teamMembers[index].city),
-              trailing: Text(teamMembers[index].mbti),
+              subtitle: Text(teamMembers[index].mbti),
+              trailing: Text(teamMembers[index].city),
             ),
           );
         },
