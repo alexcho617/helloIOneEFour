@@ -74,12 +74,18 @@ class MemberService extends ChangeNotifier {
       notifyListeners(); // Notify listeners of the change
     }
 // create member
+    createMember({required TeamMember newMember}) {
+      teamList.add(newMember);
+      saveMembers();
+      notifyListeners();
+    }
 
 // delete member
-  deleteMember({required int index}) async {
-    teamList.removeAt(index);
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove('counter');
-    notifyListeners();
+    deleteMember({required int index}) async {
+      teamList.removeAt(index);
+      final prefs = await SharedPreferences.getInstance();
+      prefs.remove('counter');
+      notifyListeners();
+    }
   }
 }
