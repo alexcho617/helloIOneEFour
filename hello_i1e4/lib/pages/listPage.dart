@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hello_i1e4/TeamMember.dart';
 import 'package:hello_i1e4/pages/detailPage.dart';
 import 'package:hello_i1e4/service/member_service.dart';
 import 'package:provider/provider.dart';
+import '../TeamMember.dart';
 import 'newPage.dart';
 
 class ListPage extends StatelessWidget {
@@ -15,8 +15,25 @@ class ListPage extends StatelessWidget {
 
       return Scaffold(
         appBar: AppBar(
-          title: Text("E1A4"),
+        title: ListTile(
+          title: Text(
+            "I1E4",
+            style: TextStyle(
+              fontSize: 70,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          subtitle: Text(
+            "안녕하세요? 저희는 I가 한명, E가 네 명인 I1E4 입니다!",
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
         ),
+        backgroundColor: Colors.grey,
+        toolbarHeight: 200,
+      ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
@@ -57,9 +74,22 @@ class ListPage extends StatelessWidget {
                       ),
                       );
                 },
-                title: Text(teamList[index].name),
-                subtitle: Text(teamList[index].city),
-                trailing: Text(teamList[index].mbti),
+                title: Text(
+                teamList[index].name,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              subtitle:
+                  Text(teamList[index].mbti, style: TextStyle(fontSize: 12)),
+              leading: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Icon(
+                    Icons.person,
+                    color: Colors.grey[500],
+                    size: 55,
+                  ),
+                ],
+              )
               ));
           },
         ),
