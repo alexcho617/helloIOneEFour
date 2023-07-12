@@ -25,11 +25,12 @@ class TeamMember {
 
   factory TeamMember.fromJson(json) {
     return TeamMember(
-      name: json['name'],
-      mbti: json['mbti'],
-      city: json['city'],
-      comment: json['comment'],
-      pic: json['pic']
-    );
+        name: json['name'],
+        mbti: json['mbti'],
+        city: json['city'],
+        comment: json['comment'],
+        pic: json['pic']);
   }
+
+  static void removeAt(int index) {}
 }

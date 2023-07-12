@@ -17,7 +17,7 @@ class ListPage extends StatelessWidget {
         appBar: AppBar(
           title: ListTile(
             title: Text(
-              "I1E4 asdf",
+              "I1E4",
               style: TextStyle(
                 fontSize: 70,
                 fontWeight: FontWeight.bold,
@@ -51,7 +51,8 @@ class ListPage extends StatelessWidget {
             return Dismissible(
                 key: UniqueKey(),
                 direction: DismissDirection.endToStart,
-                onDismissed: (_) {
+                onDismissed: (direction) {
+                  MemberService.deleteMemo(index: index);
                   // delete member
                 },
                 background: Container(
