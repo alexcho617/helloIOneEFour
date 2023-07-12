@@ -10,42 +10,42 @@ class MemberService extends ChangeNotifier {
   }
 
   List<TeamMember> teamList = [
-      TeamMember(
-        name: "홍길동",
-        mbti: "ISTJ",
-        city: "서울",
-        comment: "커피를 마시면 에너지가 넘칩니다.",
-        pic: "",
-      ),
-      TeamMember(
-        name: "김영희",
-        mbti: "ENFP",
-        city: "부산",
-        comment: "노래를 잘 부릅니다.",
-        pic: "",
-      ),
-      TeamMember(
-        name: "박철수",
-        mbti: "ESTJ",
-        city: "대구",
-        comment: "요리를 하는 것을 즐깁니다.",
-        pic: "",
-      ),
-      TeamMember(
-        name: "이미영",
-        mbti: "INTP",
-        city: "인천",
-        comment: "여행을 좋아합니다.",
-        pic: "",
-      ),
-      TeamMember(
-        name: "최민식",
-        mbti: "ISFP",
-        city: "대전",
-        comment: "악기 연주를 잘합니다.",
-        pic: "",
-      ),
-    ];
+    TeamMember(
+      name: "김도연",
+      mbti: "ESTJ",
+      city: "강원도 원주시",
+      comment: "반숙도 완숙도 싫어요~ 3/4숙 란으로 달걀을 익혀 먹어요, 몸치인데 발레가 취미에요ㅎㅎ",
+      pic: "",
+    ),
+    TeamMember(
+      name: "민지원",
+      mbti: "ESTJ",
+      city: "인천광역시 연수구",
+      comment: "집에 술장고 보유 중 ㅎㅎ,,",
+      pic: "",
+    ),
+    TeamMember(
+      name: "박찬우",
+      mbti: "INFP",
+      city: "경기도 구리시",
+      comment: "엄청난 집돌이",
+      pic: "",
+    ),
+    TeamMember(
+      name: "조성진",
+      mbti: "ESTJ",
+      city: "서울특별시 양천구",
+      comment: "사과 주주입니다. APPL 가즈아!",
+      pic: "",
+    ),
+    TeamMember(
+      name: "최진훈",
+      mbti: "ENFP",
+      city: "경기도 의정부시",
+      comment: "11년차 맨시티 팬입니다",
+      pic: "",
+    ),
+  ];
 
 // save
   saveMember() {
