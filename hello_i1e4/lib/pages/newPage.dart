@@ -62,7 +62,7 @@ class _newPageState extends State<newPage> {
               children: [
                 newPageItem(hintText: "이름"),
                 newPageItem(hintText: "MBTI"),
-                newPageItem(hintText: "TMI"),
+                newPageItem(hintText: "지역"),
                 newPageItem(hintText: "한마디"),
               ],
             ),

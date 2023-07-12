@@ -17,7 +17,7 @@ class TeamMember {
     return {
       'name': name,
       'mbti': mbti,
-      'citiy': city,
+      'city': city,
       'comment': comment,
       'pic': pic
     };

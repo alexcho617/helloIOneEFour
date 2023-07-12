@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_i1e4/TeamMember.dart';
+import 'package:hello_i1e4/pages/detailPage.dart';
 import 'package:hello_i1e4/service/member_service.dart';
 import 'package:provider/provider.dart';
 import 'newPage.dart';
@@ -47,6 +48,15 @@ class ListPage extends StatelessWidget {
                 ),
               ),
               child: ListTile(
+                onTap: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => DetailPage(teamMember: teamList[index],
+                      ),
+                      ),
+                      );
+                },
                 title: Text(teamList[index].name),
                 subtitle: Text(teamList[index].city),
                 trailing: Text(teamList[index].mbti),

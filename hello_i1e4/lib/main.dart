@@ -10,7 +10,7 @@ void main() async {
   preferences = await SharedPreferences.getInstance();
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => MemberService())],
+      providers: [ChangeNotifierProvider(create: (_) => MemberService())],
       child: const MyApp(),
       ),
     );

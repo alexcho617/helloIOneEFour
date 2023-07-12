@@ -6,7 +6,7 @@ import 'package:hello_i1e4/TeamMember.dart';
 class MemberService extends ChangeNotifier {
   MemberService() {
     // load
-    loadMember();
+    // loadMember();
   }
 
   List<TeamMember> teamList = [
