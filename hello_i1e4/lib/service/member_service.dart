@@ -49,21 +49,30 @@ class MemberService extends ChangeNotifier {
     ),
   ];
 
-// save
-  saveMember() {
+  // Save members
+  void saveMembers() {
     List memberJson = teamList.map((member) => member.toJson()).toList();
     String jsonString = jsonEncode(memberJson);
     preferences.setString('memberList', jsonString);
   }
 
-// load
-  loadMember() {
+  // Load members
+  void loadMembers() {
     String? jsonString = preferences.getString('memberList');
     if (jsonString == null) return;
-    List memeberJson = jsonDecode(jsonString);
-    teamList = memeberJson.map((json) => TeamMember.fromJson(json)).toList();
+    List memberJson = jsonDecode(jsonString);
+    teamList = memberJson.map((json) => TeamMember.fromJson(json)).toList();
   }
 
+  // Update members
+  void updateMember(TeamMember updatedMember) {
+    int index =
+        teamList.indexWhere((member) => member.name == updatedMember.name);
+    if (index != -1) {
+      teamList[index] = updatedMember;
+      saveMembers(); // Save the updated list
+      notifyListeners(); // Notify listeners of the change
+    }
 // create member
 
 // delete member
