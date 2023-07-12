@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hello_i1e4/pages/detailPage.dart';
 import 'package:hello_i1e4/service/member_service.dart';
@@ -49,48 +51,54 @@ class ListPage extends StatelessWidget {
           itemCount: teamList.length,
           itemBuilder: (context, index) {
             return Dismissible(
-                key: UniqueKey(),
-                direction: DismissDirection.endToStart,
-                onDismissed: (_) {
-                  // delete member
-                },
-                background: Container(
-                  color: Colors.red,
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  alignment: Alignment.centerRight,
-                  child: const Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                  ),
+              key: UniqueKey(),
+              direction: DismissDirection.endToStart,
+              onDismissed: (_) {
+                // delete member
+              },
+              background: Container(
+                color: Colors.red,
+                margin: const EdgeInsets.symmetric(horizontal: 15),
+                alignment: Alignment.centerRight,
+                child: const Icon(
+                  Icons.delete,
+                  color: Colors.white,
                 ),
-                child: ListTile(
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => DetailPage(
-                            index: index,
-                          ),
-                        ),
-                      );
-                    },
-                    title: Text(
-                      teamList[index].name,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              child: ListTile(
+                onTap: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => DetailPage(
+                        index: index,
+                      ),
                     ),
-                    subtitle: Text(teamList[index].mbti,
-                        style: TextStyle(fontSize: 12)),
-                    leading: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        Icon(
-                          Icons.person,
-                          color: Colors.grey[500],
-                          size: 55,
-                        ),
-                      ],
-                    )));
+                  );
+                },
+                title: Text(
+                  teamList[index].name,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                subtitle:
+                    Text(teamList[index].mbti, style: TextStyle(fontSize: 12)),
+                leading: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: memberService.teamList[index].pic != ''
+                          ? Image.file(File(memberService.teamList[index].pic))
+                          : const Image(image: AssetImage('assets/images/user.png')),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
           },
         ),
       );
