@@ -115,14 +115,16 @@ class _DetailPageState extends State<DetailPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Edit Member'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildEditField('Name', _nameController),
-              _buildEditField('MBTI', _mbtiController),
-              _buildEditField('City', _cityController),
-              _buildEditField('Fun Fact', _funFactController),
-            ],
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildEditField('Name', _nameController),
+                _buildEditField('MBTI', _mbtiController),
+                _buildEditField('City', _cityController),
+                _buildEditField('Fun Fact', _funFactController),
+              ],
+            ),
           ),
           actions: [
             TextButton(
