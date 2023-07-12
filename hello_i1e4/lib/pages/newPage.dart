@@ -30,16 +30,18 @@ class _newPageState extends State<newPage> {
     MemberService memberService = context.read<MemberService>();
 
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          TextButton(
+            onPressed: () {
+              // save
+            },
+            child: Text("저장"),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Column(children: [
-          Container(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-                onPressed: () {
-                  // btn pressed          
-                },
-                child: Text("추가")),
-          ),
           Container(
             alignment: Alignment.center,
             width: double.infinity,
@@ -86,9 +88,6 @@ class newPageItem extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: TextField(
         decoration: InputDecoration(hintText: hintText),
-        onChanged: (value) {
-          // save
-        },
         maxLines: 1,
       ),
     );
