@@ -50,14 +50,14 @@ class MemberService extends ChangeNotifier {
   ];
 
   // Save members
-  void saveMembers() {
+  saveMembers() {
     List memberJson = teamList.map((member) => member.toJson()).toList();
     String jsonString = jsonEncode(memberJson);
     preferences.setString('memberList', jsonString);
   }
 
   // Load members
-  void loadMembers() {
+  loadMembers() {
     String? jsonString = preferences.getString('memberList');
     if (jsonString == null) return;
     List memberJson = jsonDecode(jsonString);
@@ -65,7 +65,7 @@ class MemberService extends ChangeNotifier {
   }
 
   // Update members
-  void updateMember(TeamMember updatedMember) {
+  updateMember(TeamMember updatedMember) {
     int index =
         teamList.indexWhere((member) => member.name == updatedMember.name);
     if (index != -1) {
@@ -73,14 +73,12 @@ class MemberService extends ChangeNotifier {
       saveMembers(); // Save the updated list
       notifyListeners(); // Notify listeners of the change
     }
+  }
 // create member
 
 // delete member
-    deleteMember({required int index}) async {
-      teamList.removeAt(index);
-      final prefs = await SharedPreferences.getInstance();
-      prefs.remove('counter');
-      notifyListeners();
-    }
+  deleteMember({required int index}) {
+    teamList.removeAt(index);
+    notifyListeners();
   }
 }
