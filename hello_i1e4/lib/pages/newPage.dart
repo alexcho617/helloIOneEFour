@@ -36,7 +36,7 @@ class _newPageState extends State<newPage> {
             alignment: Alignment.centerRight,
             child: TextButton(
                 onPressed: () {
-                  // btn pressed
+                  // btn pressed          
                 },
                 child: Text("추가")),
           ),

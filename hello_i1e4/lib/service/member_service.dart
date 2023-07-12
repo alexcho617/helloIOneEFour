@@ -62,6 +62,10 @@ class MemberService extends ChangeNotifier {
     teamList = memeberJson.map((json) => TeamMember.fromJson(json)).toList();
   }
 
+  setChange() {
+    notifyListeners();
+  }
+
 // create member
 
 // delete member

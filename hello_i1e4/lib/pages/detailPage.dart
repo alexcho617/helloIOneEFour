@@ -1,10 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import '../TeamMember.dart';
+import 'package:provider/provider.dart';
+import '../service/member_service.dart';
 
 class DetailPage extends StatefulWidget {
-  final TeamMember teamMember;
+  final int index;
 
-  DetailPage({required this.teamMember});
+  DetailPage({required this.index});
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -14,37 +17,24 @@ class _DetailPageState extends State<DetailPage> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _mbtiController = TextEditingController();
   TextEditingController _cityController = TextEditingController();
-  TextEditingController _funFactController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    // Initialize values based on the team member object
-    _nameController.text = widget.teamMember.name;
-    _mbtiController.text = widget.teamMember.mbti;
-    _cityController.text = widget.teamMember.city;
-    _funFactController.text = widget.teamMember.comment;
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _mbtiController.dispose();
-    _cityController.dispose();
-    _funFactController.dispose();
-    super.dispose();
-  }
-
+  TextEditingController _commentController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    MemberService memberService = context.read<MemberService>();
+
+    _nameController.text = memberService.teamList[widget.index].name;
+    _mbtiController.text = memberService.teamList[widget.index].mbti;
+    _cityController.text = memberService.teamList[widget.index].city;
+    _commentController.text = memberService.teamList[widget.index].comment;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.teamMember.name),
+        title: Text(memberService.teamList[widget.index].name),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
             onPressed: () {
-              _showEditDialog();
+              showEditDialog(service: memberService, index: widget.index);
             },
           ),
         ],
@@ -59,32 +49,29 @@ class _DetailPageState extends State<DetailPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16.0),
-                  child: Image.network(
-                    'https://i.namu.wiki/i/d1A_wD4kuLHmOOFqJdVlOXVt1TWA9NfNt_HA0CS0Y_N0zayUAX8olMuv7odG2FiDLDQZIRBqbPQwBSArXfEJlQ.webp',
-                  ),
+                  child: memberService.teamList[widget.index].pic != ''
+                      ? Image.file(
+                          File(memberService.teamList[widget.index].pic))
+                      : const Image(
+                          image: AssetImage('assets/images/user.png')),
                   // 그림 넣을경우 사용
                 ),
               ),
               //한번에 패딩안에 넣는 방법을 찾다가 실패...
               Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: _buildDetailRow('Name', _nameController.text),
-              ),
-              Divider(),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: _buildDetailRow('MBTI', _mbtiController.text),
-              ),
-              Divider(),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: _buildDetailRow('City', _cityController.text),
-              ),
-              Divider(),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: _buildDetailRow('Fun Fact', _funFactController.text),
-              ),
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    _buildDetailRow('Name', _nameController.text),
+                    Divider(),
+                    _buildDetailRow('MBTI', _mbtiController.text),
+                    Divider(),
+                    _buildDetailRow('City', _cityController.text),
+                    Divider(),
+                    _buildDetailRow('Comment', _commentController.text),
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -109,7 +96,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  void _showEditDialog() {
+  showEditDialog({required MemberService service, required int index}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -121,7 +108,7 @@ class _DetailPageState extends State<DetailPage> {
               _buildEditField('Name', _nameController),
               _buildEditField('MBTI', _mbtiController),
               _buildEditField('City', _cityController),
-              _buildEditField('Fun Fact', _funFactController),
+              _buildEditField('Comment', _commentController),
             ],
           ),
           actions: [
@@ -134,17 +121,12 @@ class _DetailPageState extends State<DetailPage> {
             TextButton(
               child: Text('Save'),
               onPressed: () {
-                String newName = _nameController.text;
-                String newMbti = _mbtiController.text;
-                String newCity = _cityController.text;
-                String newFunFact = _funFactController.text;
-                // Update the values with the new ones
-                setState(() {
-                  widget.teamMember.name = newName;
-                  widget.teamMember.mbti = newMbti;
-                  widget.teamMember.city = newCity;
-                  widget.teamMember.comment = newFunFact;
-                });
+                // update로 변경 예정
+                service.teamList[widget.index].name = _nameController.text;
+                service.teamList[widget.index].mbti = _mbtiController.text;
+                service.teamList[widget.index].city = _cityController.text;
+                service.teamList[widget.index].comment =_commentController.text;
+                service.setChange();
                 Navigator.of(context).pop();
               },
             ),
