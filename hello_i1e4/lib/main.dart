@@ -12,8 +12,8 @@ void main() async {
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => MemberService())],
       child: const MyApp(),
-      ),
-    );
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

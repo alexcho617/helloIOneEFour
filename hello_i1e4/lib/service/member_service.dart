@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hello_i1e4/main.dart';
 import 'package:hello_i1e4/TeamMember.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MemberService extends ChangeNotifier {
   MemberService() {
     // load
     // loadMember();
+    // delete member
   }
 
   List<TeamMember> teamList = [
@@ -47,29 +49,38 @@ class MemberService extends ChangeNotifier {
     ),
   ];
 
-// save
-  saveMember() {
+  // Save members
+  void saveMembers() {
     List memberJson = teamList.map((member) => member.toJson()).toList();
     String jsonString = jsonEncode(memberJson);
     preferences.setString('memberList', jsonString);
   }
 
-// load
-  loadMember() {
+  // Load members
+  void loadMembers() {
     String? jsonString = preferences.getString('memberList');
     if (jsonString == null) return;
-    List memeberJson = jsonDecode(jsonString);
-    teamList = memeberJson.map((json) => TeamMember.fromJson(json)).toList();
+    List memberJson = jsonDecode(jsonString);
+    teamList = memberJson.map((json) => TeamMember.fromJson(json)).toList();
   }
 
-  setChange() {
-    notifyListeners();
-  }
-
+  // Update members
+  void updateMember(TeamMember updatedMember) {
+    int index =
+        teamList.indexWhere((member) => member.name == updatedMember.name);
+    if (index != -1) {
+      teamList[index] = updatedMember;
+      saveMembers(); // Save the updated list
+      notifyListeners(); // Notify listeners of the change
+    }
 // create member
 
 // delete member
-
-// update member
-
+    deleteMember({required int index}) async {
+      teamList.removeAt(index);
+      final prefs = await SharedPreferences.getInstance();
+      prefs.remove('counter');
+      notifyListeners();
+    }
+  }
 }

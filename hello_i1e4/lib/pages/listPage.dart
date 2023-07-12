@@ -50,12 +50,12 @@ class ListPage extends StatelessWidget {
         body: ListView.builder(
           itemCount: teamList.length,
           itemBuilder: (context, index) {
-            return Dismissible(
+            return 
+            Dismissible(
               key: UniqueKey(),
               direction: DismissDirection.endToStart,
               onDismissed: (_) {
                 // delete member
-                
               },
               background: Container(
                 color: Colors.red,
@@ -71,35 +71,28 @@ class ListPage extends StatelessWidget {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => DetailPage(
-                        index: index,
+                      builder: (_) => DetailPage(teamMember: teamList[index],
                       ),
-                    ),
-                  );
+                      ),
+                      );
                 },
                 title: Text(
-                  teamList[index].name,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                subtitle:
-                    Text(teamList[index].mbti, style: TextStyle(fontSize: 12)),
-                leading: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: memberService.teamList[index].pic != ''
-                          ? Image.file(File(memberService.teamList[index].pic))
-                          : const Image(image: AssetImage('assets/images/user.png')),
-                      ),
-                    )
-                  ],
-                ),
+                teamList[index].name,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
-            );
+              subtitle:
+                  Text(teamList[index].mbti, style: TextStyle(fontSize: 12)),
+              leading: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Icon(
+                    Icons.person,
+                    color: Colors.grey[500],
+                    size: 55,
+                  ),
+                ],
+              )
+              ));
           },
         ),
       );

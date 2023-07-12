@@ -149,7 +149,6 @@ class _DetailPageState extends State<DetailPage> {
                 service.teamList[widget.index].mbti = _mbtiController.text;
                 service.teamList[widget.index].city = _cityController.text;
                 service.teamList[widget.index].comment =_commentController.text;
-                service.setChange();
                 Navigator.of(context).pop();
               },
             ),
