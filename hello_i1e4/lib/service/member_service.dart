@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hello_i1e4/main.dart';
 import 'package:hello_i1e4/TeamMember.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MemberService extends ChangeNotifier {
   MemberService() {
     // load
     // loadMember();
+    // delete member
   }
 
   List<TeamMember> teamList = [
@@ -71,5 +73,13 @@ class MemberService extends ChangeNotifier {
       saveMembers(); // Save the updated list
       notifyListeners(); // Notify listeners of the change
     }
+// create member
+
+// delete member
+  deleteMember({required int index}) async {
+    teamList.removeAt(index);
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('counter');
+    notifyListeners();
   }
 }
