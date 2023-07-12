@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../teamMember.dart';
+import '../TeamMember.dart';
 
 class DetailPage extends StatefulWidget {
   final TeamMember teamMember;
@@ -23,7 +23,7 @@ class _DetailPageState extends State<DetailPage> {
     _nameController.text = widget.teamMember.name;
     _mbtiController.text = widget.teamMember.mbti;
     _cityController.text = widget.teamMember.city;
-    _funFactController.text = widget.teamMember.funFact;
+    _funFactController.text = widget.teamMember.comment;
   }
 
   @override
@@ -143,7 +143,7 @@ class _DetailPageState extends State<DetailPage> {
                   widget.teamMember.name = newName;
                   widget.teamMember.mbti = newMbti;
                   widget.teamMember.city = newCity;
-                  widget.teamMember.funFact = newFunFact;
+                  widget.teamMember.comment = newFunFact;
                 });
                 Navigator.of(context).pop();
               },
