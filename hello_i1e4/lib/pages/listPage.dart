@@ -54,7 +54,7 @@ class ListPage extends StatelessWidget {
               return Dismissible(
                 key: UniqueKey(),
                 direction: DismissDirection.endToStart,
-                onDismissed: (_) {
+                onDismissed: (direction) {
                   // delete member
                 },
                 background: Container(

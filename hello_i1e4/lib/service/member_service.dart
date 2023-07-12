@@ -75,6 +75,11 @@ class MemberService extends ChangeNotifier {
     }
   }
 // create member
+    createMember({required TeamMember newMember}) {
+      teamList.add(newMember);
+      saveMembers();
+      notifyListeners();
+    }
 
 // delete member
   deleteMember({required int index}) {

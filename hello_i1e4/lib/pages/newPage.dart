@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:hello_i1e4/main.dart';
 import 'package:hello_i1e4/service/member_service.dart';
 import 'package:hello_i1e4/teamMember.dart';
 import 'package:image_picker/image_picker.dart';
@@ -35,6 +36,7 @@ class _newPageState extends State<newPage> {
     memberService = context.read<MemberService>();
 
     return Scaffold(
+
       appBar: AppBar(
         actions: [
           TextButton(
@@ -47,6 +49,20 @@ class _newPageState extends State<newPage> {
       ),
       body: SafeArea(
         child: Column(children: [
+          SingleChildScrollView(
+            child: Container(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {
+                  // memberService.createMember(newMember: TeamMember.);
+                  Navigator.pop(context);
+                  // btn pressed
+                },
+                child: Text("추가"),
+              ),
+            ),
+          ),
+
           Container(
             alignment: Alignment.center,
             width: double.infinity,
