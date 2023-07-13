@@ -77,19 +77,20 @@ class ListPage extends StatelessWidget {
                       ),
                     );
                   },
+                  visualDensity: VisualDensity(horizontal: 4, vertical: 4),
                   title: Text(
                     teamList[index].name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   subtitle: Text(teamList[index].mbti,
-                      style: TextStyle(fontSize: 12)),
+                      style: TextStyle(fontSize: 16)),
                   leading: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
                       Icon(
                         Icons.person,
                         color: Colors.grey[500],
-                        size: 55,
+                        size: 60,
                       ),
                     ],
                   ),
