@@ -39,7 +39,7 @@ class _ListPageState extends State<ListPage> {
                 ),
               ],
             ),
-            backgroundColor:Color.fromARGB(255, 144, 203, 250),
+            backgroundColor: Color.fromARGB(255, 144, 203, 250),
             toolbarHeight: 200,
           ),
           body: ListView.builder(
@@ -65,7 +65,8 @@ class _ListPageState extends State<ListPage> {
                           ),
                           TextButton(
                             onPressed: () {
-                              memberService.canceldelete(tempIndex: index, tempMember: tempMember);
+                              memberService.canceldelete(
+                                  tempIndex: index, tempMember: tempMember);
                               Navigator.of(context).pop();
                             },
                             child: Text("취소"),
@@ -89,9 +90,9 @@ class _ListPageState extends State<ListPage> {
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border(bottom: BorderSide(
-                        color: Color.fromARGB(255, 144, 203, 250)
-                      ),
+                      border: Border(
+                        bottom: BorderSide(
+                            color: Color.fromARGB(255, 144, 203, 250)),
                       ),
                     ),
                     child: ListTile(
@@ -105,12 +106,14 @@ class _ListPageState extends State<ListPage> {
                           ),
                         );
                       },
+                      visualDensity: VisualDensity(horizontal: 4, vertical: 4),
                       title: Text(
                         teamList[index].name,
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 24),
                       ),
                       subtitle: Text(teamList[index].mbti,
-                          style: TextStyle(fontSize: 12)),
+                          style: TextStyle(fontSize: 16)),
                       leading: Stack(
                         alignment: Alignment.bottomCenter,
                         children: [
@@ -118,7 +121,8 @@ class _ListPageState extends State<ListPage> {
                             width: 30,
                             height: 30,
                             child: memberService.teamList[index].pic != ''
-                                ? Image.network(memberService.teamList[index].pic)
+                                ? Image.network(
+                                    memberService.teamList[index].pic)
                                 : Icon(
                                     Icons.person,
                                     color: Colors.grey[500],
@@ -140,7 +144,7 @@ class _ListPageState extends State<ListPage> {
               );
             },
           ),
-           floatingActionButton: FloatingActionButton(
+          floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: () {
               Navigator.push(
