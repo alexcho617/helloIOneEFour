@@ -72,8 +72,8 @@ class MemberService extends ChangeNotifier {
     member.comment = comment;
     saveMembers(); // Save the updated list
     notifyListeners(); // Notify listeners of the change
-    }
-    
+  }
+
 // create member
   createMember({required TeamMember newMember}) {
     teamList.add(newMember);
@@ -95,3 +95,4 @@ class MemberService extends ChangeNotifier {
     notifyListeners();
   }
 }
+
