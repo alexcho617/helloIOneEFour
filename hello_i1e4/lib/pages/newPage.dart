@@ -20,22 +20,23 @@ class _newPageState extends State<newPage> {
   var newMember =
       TeamMember(name: "", mbti: "", city: "", comment: "", pic: "");
 
-    String? photo_file;
-    final ImagePicker picker = ImagePicker();
-    Future getImage(ImageSource imageSource) async {
-      final XFile? pickedFile = await picker.pickImage(source: imageSource);
-      if (pickedFile != null) {
-        setState(() {
-          photo_file = pickedFile.path;
-        });
-      }
-    }
+    // String? photo_file;
+    // final ImagePicker picker = ImagePicker();
+    // Future getImage() async {
+    //   final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    //   if (pickedFile != null) {
+    //     setState(() {
+    //       photo_file = pickedFile.path;
+    //     });
+    //   }
+    // }
 
   @override
   Widget build(BuildContext context) {
     memberService = context.read<MemberService>();
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         actions: [
           TextButton(
@@ -55,12 +56,13 @@ class _newPageState extends State<newPage> {
             width: double.infinity,
             height: 300,
             child: GestureDetector(
-              onTap: () {
-                getImage(ImageSource.gallery);
-              },
-              child: photo_file != null
-                  ? Image.file(File(photo_file!))
-                  : const Image(image: AssetImage('assets/images/user.png')),
+              // // Image
+              // onTap: () {
+              //   getImage();
+              // },
+              // child: photo_file != null
+              //     ? Image.file(File(photo_file!))
+              //     : const Image(image: AssetImage('assets/images/user.png')),
             ),
           ),
           const Divider(),
