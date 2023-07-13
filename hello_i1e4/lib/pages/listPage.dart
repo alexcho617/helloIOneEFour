@@ -18,8 +18,8 @@ class ListPage extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: ListTile(
-              title: Text(
+            title: Column(children: [
+              Text(
                 "I1E4",
                 style: TextStyle(
                   fontSize: 70,
@@ -27,18 +27,19 @@ class ListPage extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              subtitle: Text(
+              Text(
                 "안녕하세요? 저희는 I가 한명, E가 네 명인 I1E4 입니다!",
                 style: TextStyle(
                   fontSize: 16,
                 ),
               ),
-            ),
+            ]),
             backgroundColor: Colors.grey,
             toolbarHeight: 200,
           ),
           floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
+            backgroundColor: Colors.grey,
+            child: Icon(Icons.add_circle_rounded),
             onPressed: () {
               Navigator.push(
                 context,
@@ -66,32 +67,37 @@ class ListPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                child: ListTile(
-                  onTap: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => DetailPage(
-                          index: index,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListTile(
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => DetailPage(
+                            index: index,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  title: Text(
-                    teamList[index].name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                  subtitle: Text(teamList[index].mbti,
-                      style: TextStyle(fontSize: 12)),
-                  leading: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Icon(
-                        Icons.person,
-                        color: Colors.grey[500],
-                        size: 55,
-                      ),
-                    ],
+                      );
+                    },
+                    visualDensity: VisualDensity(horizontal: 4, vertical: 4),
+                    title: Text(
+                      teamList[index].name,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    ),
+                    subtitle: Text(teamList[index].mbti,
+                        style: TextStyle(fontSize: 16)),
+                    leading: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        Icon(
+                          Icons.person,
+                          color: Colors.grey[500],
+                          size: 60,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
