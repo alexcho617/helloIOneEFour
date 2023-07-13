@@ -22,16 +22,18 @@ class _DetailPageState extends State<DetailPage> {
   TextEditingController _commentController = TextEditingController();
 
   String? photo_file;
-    final ImagePicker picker = ImagePicker();
-    Future getImage(ImageSource imageSource) async {
-      final XFile? pickedFile = await picker.pickImage(source: imageSource);
-      if (pickedFile != null) {
-        setState(() {
-          photo_file = pickedFile.path;
-          memberService.teamList[widget.index].pic = pickedFile.path;
-        });
-      }
+  final ImagePicker picker = ImagePicker();
+  Future getImage() async {
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      // setState?
+      setState(() {
+        photo_file = pickedFile.path;
+        memberService.teamList[widget.index].pic = pickedFile.path;
+      });
     }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,12 +66,22 @@ class _DetailPageState extends State<DetailPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16.0),
-                  child: memberService.teamList[widget.index].pic != ''
-                      ? Image.file(
-                          File(memberService.teamList[widget.index].pic))
-                      : const Image(
-                          image: AssetImage('assets/images/user.png')),
-                  // 그림 넣을경우 사용
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: 300,
+                    child: memberService.teamList[widget.index].pic != ''
+                        ? Image.network(
+                            memberService.teamList[widget.index].pic)
+                        : const Image(
+                            image: AssetImage('assets/images/user.png')),
+                    // // Image
+                    // child: memberService.teamList[widget.index].pic != ''
+                    //     ? Image.file(
+                    //         File(memberService.teamList[widget.index].pic))
+                    //     : const Image(
+                    //         image: AssetImage('assets/images/user.png')),
+                  ),
                 ),
               ),
               //한번에 패딩안에 넣는 방법을 찾다가 실패...
@@ -77,13 +89,26 @@ class _DetailPageState extends State<DetailPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
                   children: [
-                    _buildDetailRow('Name', memberService.teamList[widget.index].name),
-                    Divider(),
-                    _buildDetailRow('MBTI', memberService.teamList[widget.index].mbti),
-                    Divider(),
-                    _buildDetailRow('City', memberService.teamList[widget.index].city),
-                    Divider(),
-                    _buildDetailRow('Comment', memberService.teamList[widget.index].comment),
+                    _buildDetailRow(
+                        'Name', memberService.teamList[widget.index].name),
+                    Divider(
+                      color: Color.fromARGB(255, 144, 203, 250),
+                    ),
+                    _buildDetailRow(
+                        'MBTI', memberService.teamList[widget.index].mbti),
+                    Divider(
+                      color: Color.fromARGB(255, 144, 203, 250),
+                    ),
+                    _buildDetailRow(
+                        'City', memberService.teamList[widget.index].city),
+                    Divider(
+                      color: Color.fromARGB(255, 144, 203, 250),
+                    ),
+                    _buildDetailRow('Comment',
+                        memberService.teamList[widget.index].comment),
+                    Divider(
+                      color: Color.fromARGB(255, 144, 203, 250),
+                    ),
                   ],
                 ),
               )
@@ -119,13 +144,14 @@ class _DetailPageState extends State<DetailPage> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  //save img
-                  getImage(ImageSource.gallery);
-                },
-                child: Icon(Icons.add_a_photo),
-                ),
+              // // Image
+              // ElevatedButton(
+              //   onPressed: () {
+              //     //save img
+              //     getImage();
+              //   },
+              //   child: Icon(Icons.add_a_photo),
+              // ),
               _buildEditField('Name', _nameController),
               _buildEditField('MBTI', _mbtiController),
               _buildEditField('City', _cityController),
@@ -142,18 +168,20 @@ class _DetailPageState extends State<DetailPage> {
             TextButton(
               child: Text('Save'),
               onPressed: () {
-                // update로 변경 예정
-                // service.teamList[widget.index].name = _nameController.text;
-                // service.teamList[widget.index].mbti = _mbtiController.text;
-                // service.teamList[widget.index].city = _cityController.text;
-                // service.teamList[widget.index].comment =_commentController.text;
-                memberService.updateMember(
-                  index: index, 
-                  name: _nameController.text, 
-                  mbti: _mbtiController.text, 
-                  city: _cityController.text,
-                  comment: _commentController.text
-                  );
+                // setState(() {
+                //   service.updateMember(
+                //     index: index,
+                //     name: _nameController.text,
+                //     mbti: _mbtiController.text,
+                //     city: _cityController.text,
+                //     comment: _commentController.text);
+                // });
+                service.updateMember(
+                    index: index,
+                    name: _nameController.text,
+                    mbti: _mbtiController.text,
+                    city: _cityController.text,
+                    comment: _commentController.text);
                 Navigator.of(context).pop();
               },
             ),
@@ -165,7 +193,7 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget _buildEditField(String label, TextEditingController controller) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.all(10.0),
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
