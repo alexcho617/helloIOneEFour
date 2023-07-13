@@ -63,15 +63,20 @@ class MemberService extends ChangeNotifier {
   }
 
   // Update members
-  updateMember({required int index, required String name, required String mbti, required String city, required String comment}) {
+  updateMember(
+      {required int index,
+      required String name,
+      required String mbti,
+      required String city,
+      required String comment}) {
     teamList[index].name = name;
     teamList[index].mbti = mbti;
     teamList[index].city = city;
     teamList[index].comment = comment;
     saveMembers(); // Save the updated list
     notifyListeners(); // Notify listeners of the change
-    }
-    
+  }
+
 // create member
   createMember({required TeamMember newMember}) {
     teamList.insert(0, newMember);
