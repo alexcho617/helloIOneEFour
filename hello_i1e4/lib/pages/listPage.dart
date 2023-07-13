@@ -38,7 +38,8 @@ class ListPage extends StatelessWidget {
             toolbarHeight: 200,
           ),
           floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
+            backgroundColor: Colors.grey,
+            child: Icon(Icons.add_circle_rounded),
             onPressed: () {
               Navigator.push(
                 context,
