@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -79,13 +77,13 @@ class _DetailPageState extends State<DetailPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
                   children: [
-                    _buildDetailRow('Name', _nameController.text),
+                    _buildDetailRow('Name', memberService.teamList[widget.index].name),
                     Divider(),
-                    _buildDetailRow('MBTI', _mbtiController.text),
+                    _buildDetailRow('MBTI', memberService.teamList[widget.index].mbti),
                     Divider(),
-                    _buildDetailRow('City', _cityController.text),
+                    _buildDetailRow('City', memberService.teamList[widget.index].city),
                     Divider(),
-                    _buildDetailRow('Comment', _commentController.text),
+                    _buildDetailRow('Comment', memberService.teamList[widget.index].comment),
                   ],
                 ),
               )
@@ -145,10 +143,17 @@ class _DetailPageState extends State<DetailPage> {
               child: Text('Save'),
               onPressed: () {
                 // update로 변경 예정
-                service.teamList[widget.index].name = _nameController.text;
-                service.teamList[widget.index].mbti = _mbtiController.text;
-                service.teamList[widget.index].city = _cityController.text;
-                service.teamList[widget.index].comment =_commentController.text;
+                // service.teamList[widget.index].name = _nameController.text;
+                // service.teamList[widget.index].mbti = _mbtiController.text;
+                // service.teamList[widget.index].city = _cityController.text;
+                // service.teamList[widget.index].comment =_commentController.text;
+                memberService.updateMember(
+                  index: index, 
+                  name: _nameController.text, 
+                  mbti: _mbtiController.text, 
+                  city: _cityController.text,
+                  comment: _commentController.text
+                  );
                 Navigator.of(context).pop();
               },
             ),

@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:hello_i1e4/main.dart';
 import 'package:hello_i1e4/service/member_service.dart';
-import 'package:hello_i1e4/teamMember.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+
+import '../TeamMember.dart';
 
 class newPage extends StatefulWidget {
   newPage({
@@ -17,7 +17,7 @@ class newPage extends StatefulWidget {
 
 class _newPageState extends State<newPage> {
   MemberService memberService = MemberService();
-  TeamMember newMember =
+  var newMember =
       TeamMember(name: "", mbti: "", city: "", comment: "", pic: "");
 
     String? photo_file;
@@ -36,12 +36,13 @@ class _newPageState extends State<newPage> {
     memberService = context.read<MemberService>();
 
     return Scaffold(
-
       appBar: AppBar(
         actions: [
           TextButton(
             onPressed: () {
               // save
+              memberService.createMember(newMember: newMember);
+              Navigator.of(context).pop();
             },
             child: Text("저장"),
           ),
@@ -49,20 +50,6 @@ class _newPageState extends State<newPage> {
       ),
       body: SafeArea(
         child: Column(children: [
-          SingleChildScrollView(
-            child: Container(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {
-                  // memberService.createMember(newMember: TeamMember.);
-                  Navigator.pop(context);
-                  // btn pressed
-                },
-                child: Text("추가"),
-              ),
-            ),
-          ),
-
           Container(
             alignment: Alignment.center,
             width: double.infinity,

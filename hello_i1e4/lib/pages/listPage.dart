@@ -55,7 +55,7 @@ class ListPage extends StatelessWidget {
                 key: UniqueKey(),
                 direction: DismissDirection.endToStart,
                 onDismissed: (direction) {
-                  // delete member
+                  memberService.deleteMember(index: index);
                 },
                 background: Container(
                   color: Colors.red,
