@@ -1,6 +1,4 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../service/member_service.dart';
 
@@ -21,23 +19,9 @@ class _DetailPageState extends State<DetailPage> {
   TextEditingController _cityController = TextEditingController();
   TextEditingController _commentController = TextEditingController();
 
-  String? photo_file;
-  final ImagePicker picker = ImagePicker();
-  Future getImage() async {
-    final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      // setState?
-      setState(() {
-        photo_file = pickedFile.path;
-        memberService.teamList[widget.index].pic = pickedFile.path;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    memberService = context.read<MemberService>();
+    memberService = context.watch<MemberService>();
 
     _nameController.text = memberService.teamList[widget.index].name;
     _mbtiController.text = memberService.teamList[widget.index].mbti;
@@ -70,21 +54,14 @@ class _DetailPageState extends State<DetailPage> {
                     alignment: Alignment.center,
                     width: double.infinity,
                     height: 300,
+                    // Image
                     child: memberService.teamList[widget.index].pic != ''
-                        ? Image.network(
-                            memberService.teamList[widget.index].pic)
+                        ? Image.network(memberService.teamList[widget.index].pic)
                         : const Image(
                             image: AssetImage('assets/images/user.png')),
-                    // // Image
-                    // child: memberService.teamList[widget.index].pic != ''
-                    //     ? Image.file(
-                    //         File(memberService.teamList[widget.index].pic))
-                    //     : const Image(
-                    //         image: AssetImage('assets/images/user.png')),
                   ),
                 ),
               ),
-              //한번에 패딩안에 넣는 방법을 찾다가 실패...
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
@@ -144,14 +121,6 @@ class _DetailPageState extends State<DetailPage> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // // Image
-              // ElevatedButton(
-              //   onPressed: () {
-              //     //save img
-              //     getImage();
-              //   },
-              //   child: Icon(Icons.add_a_photo),
-              // ),
               _buildEditField('Name', _nameController),
               _buildEditField('MBTI', _mbtiController),
               _buildEditField('City', _cityController),
@@ -162,20 +131,16 @@ class _DetailPageState extends State<DetailPage> {
             TextButton(
               child: Text('Cancel'),
               onPressed: () {
+                 _nameController.text = memberService.teamList[index].name;
+                _mbtiController.text = memberService.teamList[index].mbti;
+                _cityController.text = memberService.teamList[index].city;
+                _commentController.text = memberService.teamList[index].comment;
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
               child: Text('Save'),
               onPressed: () {
-                // setState(() {
-                //   service.updateMember(
-                //     index: index,
-                //     name: _nameController.text,
-                //     mbti: _mbtiController.text,
-                //     city: _cityController.text,
-                //     comment: _commentController.text);
-                // });
                 service.updateMember(
                     index: index,
                     name: _nameController.text,
