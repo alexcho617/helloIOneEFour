@@ -20,22 +20,23 @@ class _newPageState extends State<newPage> {
   var newMember =
       TeamMember(name: "", mbti: "", city: "", comment: "", pic: "");
 
-    String? photo_file;
-    final ImagePicker picker = ImagePicker();
-    Future getImage(ImageSource imageSource) async {
-      final XFile? pickedFile = await picker.pickImage(source: imageSource);
-      if (pickedFile != null) {
-        setState(() {
-          photo_file = pickedFile.path;
-        });
-      }
+  String? photo_file;
+  final ImagePicker picker = ImagePicker();
+  Future getImage(ImageSource imageSource) async {
+    final XFile? pickedFile = await picker.pickImage(source: imageSource);
+    if (pickedFile != null) {
+      setState(() {
+        photo_file = pickedFile.path;
+      });
     }
+  }
 
   @override
   Widget build(BuildContext context) {
     memberService = context.read<MemberService>();
 
     return Scaffold(
+      resizeToAvoidBottomInset: true, // overflow  에러 수정
       appBar: AppBar(
         actions: [
           TextButton(
@@ -49,36 +50,41 @@ class _newPageState extends State<newPage> {
         ],
       ),
       body: SafeArea(
-        child: Column(children: [
-          Container(
-            alignment: Alignment.center,
-            width: double.infinity,
-            height: 300,
-            child: GestureDetector(
-              onTap: () {
-                getImage(ImageSource.gallery);
-              },
-              child: photo_file != null
-                  ? Image.file(File(photo_file!))
-                  : const Image(image: AssetImage('assets/images/user.png')),
-            ),
-          ),
-          const Divider(),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              children: [
-                newPageItem(
-                  hintText: "이름",
-                  newMember: newMember,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: 300,
+                child: GestureDetector(
+                  onTap: () {
+                    getImage(ImageSource.gallery);
+                  },
+                  child: photo_file != null
+                      ? Image.file(File(photo_file!))
+                      : const Image(
+                          image: AssetImage('assets/images/user.png')),
                 ),
-                newPageItem(hintText: "MBTI", newMember: newMember),
-                newPageItem(hintText: "지역", newMember: newMember),
-                newPageItem(hintText: "한마디", newMember: newMember),
-              ],
-            ),
-          )
-        ]),
+              ),
+              Divider(),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  children: [
+                    newPageItem(
+                      hintText: "이름",
+                      newMember: newMember,
+                    ),
+                    newPageItem(hintText: "MBTI", newMember: newMember),
+                    newPageItem(hintText: "지역", newMember: newMember),
+                    newPageItem(hintText: "한마디", newMember: newMember),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

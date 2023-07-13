@@ -18,21 +18,23 @@ class ListPage extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: ListTile(
-              title: Text(
-                "I1E4",
-                style: TextStyle(
-                  fontSize: 70,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+            title: Column(
+              children: [
+                Text(
+                  "I1E4",
+                  style: TextStyle(
+                    fontSize: 70,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              subtitle: Text(
-                "안녕하세요? 저희는 I가 한명, E가 네 명인 I1E4 입니다!",
-                style: TextStyle(
-                  fontSize: 16,
+                Text(
+                  "안녕하세요? 저희는 I가 한명, E가 네 명인 I1E4 입니다!",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
-              ),
+              ],
             ),
             backgroundColor: Colors.grey,
             toolbarHeight: 200,

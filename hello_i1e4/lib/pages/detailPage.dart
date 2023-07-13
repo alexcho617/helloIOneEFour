@@ -22,16 +22,16 @@ class _DetailPageState extends State<DetailPage> {
   TextEditingController _commentController = TextEditingController();
 
   String? photo_file;
-    final ImagePicker picker = ImagePicker();
-    Future getImage(ImageSource imageSource) async {
-      final XFile? pickedFile = await picker.pickImage(source: imageSource);
-      if (pickedFile != null) {
-        setState(() {
-          photo_file = pickedFile.path;
-          memberService.teamList[widget.index].pic = pickedFile.path;
-        });
-      }
+  final ImagePicker picker = ImagePicker();
+  Future getImage(ImageSource imageSource) async {
+    final XFile? pickedFile = await picker.pickImage(source: imageSource);
+    if (pickedFile != null) {
+      setState(() {
+        photo_file = pickedFile.path;
+        memberService.teamList[widget.index].pic = pickedFile.path;
+      });
     }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +77,17 @@ class _DetailPageState extends State<DetailPage> {
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
                   children: [
-                    _buildDetailRow('Name', memberService.teamList[widget.index].name),
+                    _buildDetailRow(
+                        'Name', memberService.teamList[widget.index].name),
                     Divider(),
-                    _buildDetailRow('MBTI', memberService.teamList[widget.index].mbti),
+                    _buildDetailRow(
+                        'MBTI', memberService.teamList[widget.index].mbti),
                     Divider(),
-                    _buildDetailRow('City', memberService.teamList[widget.index].city),
+                    _buildDetailRow(
+                        'City', memberService.teamList[widget.index].city),
                     Divider(),
-                    _buildDetailRow('Comment', memberService.teamList[widget.index].comment),
+                    _buildDetailRow('Comment',
+                        memberService.teamList[widget.index].comment),
                   ],
                 ),
               )
@@ -125,7 +129,7 @@ class _DetailPageState extends State<DetailPage> {
                   getImage(ImageSource.gallery);
                 },
                 child: Icon(Icons.add_a_photo),
-                ),
+              ),
               _buildEditField('Name', _nameController),
               _buildEditField('MBTI', _mbtiController),
               _buildEditField('City', _cityController),
@@ -148,12 +152,11 @@ class _DetailPageState extends State<DetailPage> {
                 // service.teamList[widget.index].city = _cityController.text;
                 // service.teamList[widget.index].comment =_commentController.text;
                 memberService.updateMember(
-                  index: index, 
-                  name: _nameController.text, 
-                  mbti: _mbtiController.text, 
-                  city: _cityController.text,
-                  comment: _commentController.text
-                  );
+                    index: index,
+                    name: _nameController.text,
+                    mbti: _mbtiController.text,
+                    city: _cityController.text,
+                    comment: _commentController.text);
                 Navigator.of(context).pop();
               },
             ),
