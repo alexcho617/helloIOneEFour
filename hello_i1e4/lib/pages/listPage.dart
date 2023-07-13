@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hello_i1e4/pages/detailPage.dart';
 import 'package:hello_i1e4/service/member_service.dart';
@@ -49,7 +48,6 @@ class _ListPageState extends State<ListPage> {
                 key: UniqueKey(),
                 direction: DismissDirection.endToStart,
                 onDismissed: (direction) {
-                  TeamMember tempMember = memberService.teamList[index];
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -65,8 +63,7 @@ class _ListPageState extends State<ListPage> {
                           ),
                           TextButton(
                             onPressed: () {
-                              memberService.canceldelete(
-                                  tempIndex: index, tempMember: tempMember);
+                              memberService.changeState();
                               Navigator.of(context).pop();
                             },
                             child: Text("취소"),
@@ -75,7 +72,6 @@ class _ListPageState extends State<ListPage> {
                       );
                     },
                   );
-                  memberService.deleteMember(index: index);
                 },
                 background: Container(
                   color: Colors.red,
@@ -120,21 +116,13 @@ class _ListPageState extends State<ListPage> {
                           SizedBox(
                             width: 30,
                             height: 30,
+                            // Image
                             child: memberService.teamList[index].pic != ''
-                                ? Image.network(
-                                    memberService.teamList[index].pic)
+                                ? Image.network(memberService.teamList[index].pic)
                                 : Icon(
                                     Icons.person,
                                     color: Colors.grey[500],
                                   ),
-                            // // Image
-                            // child: memberService.teamList[index].pic != ''
-                            //     ? Image.file(
-                            //         File(memberService.teamList[index].pic))
-                            //     : Icon(
-                            //         Icons.person,
-                            //         color: Colors.grey[500],
-                            //       ),
                           ),
                         ],
                       ),

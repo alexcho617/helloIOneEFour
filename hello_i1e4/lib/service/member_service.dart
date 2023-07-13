@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hello_i1e4/main.dart';
 import 'package:hello_i1e4/TeamMember.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MemberService extends ChangeNotifier {
   MemberService() {
@@ -87,11 +86,8 @@ class MemberService extends ChangeNotifier {
     saveMembers();
     notifyListeners();
   }
-  
-  // cancel delete member
-  canceldelete({required int tempIndex, required TeamMember tempMember}) {
-    teamList.insert(tempIndex, tempMember);
-    saveMembers();
+
+  changeState() {
     notifyListeners();
   }
 }
