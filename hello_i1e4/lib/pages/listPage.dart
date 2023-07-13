@@ -67,33 +67,37 @@ class ListPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                child: ListTile(
-                  onTap: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => DetailPage(
-                          index: index,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListTile(
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => DetailPage(
+                            index: index,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  visualDensity: VisualDensity(horizontal: 4, vertical: 4),
-                  title: Text(
-                    teamList[index].name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                  ),
-                  subtitle: Text(teamList[index].mbti,
-                      style: TextStyle(fontSize: 16)),
-                  leading: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Icon(
-                        Icons.person,
-                        color: Colors.grey[500],
-                        size: 60,
-                      ),
-                    ],
+                      );
+                    },
+                    visualDensity: VisualDensity(horizontal: 4, vertical: 4),
+                    title: Text(
+                      teamList[index].name,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    ),
+                    subtitle: Text(teamList[index].mbti,
+                        style: TextStyle(fontSize: 16)),
+                    leading: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        Icon(
+                          Icons.person,
+                          color: Colors.grey[500],
+                          size: 60,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
