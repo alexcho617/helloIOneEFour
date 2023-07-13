@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:hello_i1e4/main.dart';
 import 'package:hello_i1e4/service/member_service.dart';
-import 'package:hello_i1e4/teamMember.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+
+import '../TeamMember.dart';
 
 class newPage extends StatefulWidget {
   newPage({
@@ -16,38 +16,40 @@ class newPage extends StatefulWidget {
 }
 
 class _newPageState extends State<newPage> {
-  XFile? photo_file;
-  final ImagePicker picker = ImagePicker();
-  Future getImage(ImageSource imageSource) async {
-    final XFile? pickedFile = await picker.pickImage(source: imageSource);
-    if (pickedFile != null) {
-      setState(() {
-        photo_file = XFile(pickedFile.path);
-      });
+  MemberService memberService = MemberService();
+  var newMember =
+      TeamMember(name: "", mbti: "", city: "", comment: "", pic: "");
+
+    String? photo_file;
+    final ImagePicker picker = ImagePicker();
+    Future getImage(ImageSource imageSource) async {
+      final XFile? pickedFile = await picker.pickImage(source: imageSource);
+      if (pickedFile != null) {
+        setState(() {
+          photo_file = pickedFile.path;
+        });
+      }
     }
-  }
 
   @override
   Widget build(BuildContext context) {
-    MemberService memberService = context.read<MemberService>();
+    memberService = context.read<MemberService>();
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        actions: [
+          TextButton(
+            onPressed: () {
+              // save
+              memberService.createMember(newMember: newMember);
+              Navigator.of(context).pop();
+            },
+            child: Text("저장"),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Column(children: [
-          SingleChildScrollView(
-            child: Container(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {
-                  // memberService.createMember(newMember: TeamMember.);
-                  Navigator.pop(context);
-                  // btn pressed
-                },
-                child: Text("추가"),
-              ),
-            ),
-          ),
           Container(
             alignment: Alignment.center,
             width: double.infinity,
@@ -55,10 +57,9 @@ class _newPageState extends State<newPage> {
             child: GestureDetector(
               onTap: () {
                 getImage(ImageSource.gallery);
-                print(photo_file?.path);
               },
               child: photo_file != null
-                  ? Image.file(File(photo_file!.path))
+                  ? Image.file(File(photo_file!))
                   : const Image(image: AssetImage('assets/images/user.png')),
             ),
           ),
@@ -67,10 +68,13 @@ class _newPageState extends State<newPage> {
             alignment: Alignment.centerLeft,
             child: Column(
               children: [
-                newPageItem(hintText: "이름"),
-                newPageItem(hintText: "MBTI"),
-                newPageItem(hintText: "지역"),
-                newPageItem(hintText: "한마디"),
+                newPageItem(
+                  hintText: "이름",
+                  newMember: newMember,
+                ),
+                newPageItem(hintText: "MBTI", newMember: newMember),
+                newPageItem(hintText: "지역", newMember: newMember),
+                newPageItem(hintText: "한마디", newMember: newMember),
               ],
             ),
           )
@@ -82,10 +86,12 @@ class _newPageState extends State<newPage> {
 
 class newPageItem extends StatelessWidget {
   var hintText;
+  TeamMember newMember;
 
   newPageItem({
     super.key,
     required this.hintText,
+    required this.newMember,
   });
 
   @override
@@ -94,10 +100,19 @@ class newPageItem extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: TextField(
         decoration: InputDecoration(hintText: hintText),
-        onChanged: (value) {
-          // save
-        },
         maxLines: 1,
+        onChanged: (value) {
+          switch (hintText) {
+            case "이름":
+              newMember.name = value;
+            case "MBTI":
+              newMember.mbti = value;
+            case "지역":
+              newMember.city = value;
+            case "한마디":
+              newMember.comment = value;
+          }
+        },
       ),
     );
   }

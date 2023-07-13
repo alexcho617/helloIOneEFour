@@ -31,6 +31,4 @@ class TeamMember {
         comment: json['comment'],
         pic: json['pic']);
   }
-
-  static void removeAt(int index) {}
 }
