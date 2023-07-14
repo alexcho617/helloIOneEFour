@@ -1,13 +1,10 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hello_i1e4/service/member_service.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
 import '../TeamMember.dart';
 
 class newPage extends StatefulWidget {
-  newPage({
+  const newPage({
     super.key,
   });
 
@@ -19,17 +16,6 @@ class _newPageState extends State<newPage> {
   MemberService memberService = MemberService();
   var newMember =
       TeamMember(name: "", mbti: "", city: "", comment: "", pic: "");
-
-  // String? photo_file;
-  // final ImagePicker picker = ImagePicker();
-  // Future getImage() async {
-  //   final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
-  //   if (pickedFile != null) {
-  //     setState(() {
-  //       photo_file = pickedFile.path;
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +43,6 @@ class _newPageState extends State<newPage> {
             height: 300,
             child: GestureDetector(
               child: Image(image: AssetImage('assets/images/user.png')),
-              // // Image
-              // onTap: () {
-              //   getImage();
-              // },
-              // child: photo_file != null
-              //     ? Image.file(File(photo_file!))
-              //     : const Image(image: AssetImage('assets/images/user.png')),
             ),
           ),
           Padding(
