@@ -65,8 +65,6 @@ class _ListPageState extends State<ListPage> {
                           ),
                           TextButton(
                             onPressed: () {
-                              memberService.canceldelete(
-                                  tempIndex: index, tempMember: tempMember);
                               Navigator.of(context).pop();
                             },
                             child: Text("취소"),
@@ -75,7 +73,6 @@ class _ListPageState extends State<ListPage> {
                       );
                     },
                   );
-                  memberService.deleteMember(index: index);
                 },
                 background: Container(
                   color: Colors.red,
